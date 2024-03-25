@@ -312,7 +312,7 @@ export default function ResumeParser() {
       <Flex w={"100%"} p={"2%"}>
         <Box w={"45%"} mr={"3%"}>
           <Container maxW="container.md" mt={10}>
-            !loading&& <ResumeData extractedData={resumeData} />
+            !loading&& <ResumeData data={data} />
           </Container>
         </Box>
         <Box w={"45%"}>

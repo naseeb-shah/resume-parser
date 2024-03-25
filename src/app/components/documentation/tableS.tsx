@@ -1,13 +1,13 @@
 import { Box, Table, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 interface PersonalInfo {
-  name: {
-    first_name: string;
-    last_name: string;
-    raw_name: string;
-    middle: string | null;
-    title: string | null;
-    prefix: string | null;
-    sufix: string | null;
+  name?: {
+    first_name?: string;
+    last_name?: string;
+    raw_name?: string;
+    middle?: string | null;
+    title?: string | null;
+    prefix?: string | null;
+    sufix?: string | null;
   };
   address: {
     formatted_location: string;
@@ -90,24 +90,22 @@ interface Skill {
 }
 
 export interface ResumeDataProps {
-  extractedData: {
-    personal_infos: PersonalInfo;
-    education: {
-      total_years_education: string | null;
-      entries: EducationEntry[];
-    };
-    work_experience: {
-      total_years_experience: string | null;
-      entries: WorkExperienceEntry[];
-    };
-    languages: Language[];
-    skills: Skill[];
+  personal_infos: PersonalInfo; // Ensure personal_infos property exists
+  education: {
+    total_years_education: string | null;
+    entries?: EducationEntry[];
   };
+  work_experience: {
+    total_years_experience?: string | null;
+    entries?: WorkExperienceEntry[];
+  };
+  languages?: Language[];
+  skills?: Skill[];
 }
 
-const ResumeData: React.FC<ResumeDataProps> = ({ extractedData }) => {
+const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
   const { personal_infos, education, work_experience, languages, skills } =
-    extractedData;
+    props.data;
 
   return (
     <Box className="mt-2 w-full border text-sm white">
@@ -118,28 +116,28 @@ const ResumeData: React.FC<ResumeDataProps> = ({ extractedData }) => {
           </Tr>
           <Tr>
             <Td>Name</Td>
-            <Td>{`${personal_infos.name.first_name} ${personal_infos.name.last_name}`}</Td>
+            <Td>{`${personal_infos?.name.first_name} ${personal_infos?.name.last_name}`}</Td>
           </Tr>
           <Tr>
             <Td>Email</Td>
-            <Td>{personal_infos.mails.join(", ")}</Td>
+            <Td>{personal_infos?.mails.join(", ")}</Td>
           </Tr>
           <Tr>
             <Td>Phone</Td>
-            <Td>{personal_infos.phones.join(", ")}</Td>
+            <Td>{personal_infos?.phones.join(", ")}</Td>
           </Tr>
           <Tr>
             <Td>Location</Td>
-            <Td>{personal_infos.address.formatted_location}</Td>
+            <Td>{personal_infos?.address.formatted_location}</Td>
           </Tr>
           <Tr>
             <Td>Summary</Td>
-            <Td>{personal_infos.self_summary}</Td>
+            <Td>{personal_infos?.self_summary}</Td>
           </Tr>
           <Tr>
             <Th>Education</Th>
           </Tr>
-          {education.entries.map((entry: any, idx: any) => (
+          {education.entries?.map((entry: any, idx: any) => (
             <>
               <Tr key={idx}>
                 <Td>Title</Td>
@@ -158,7 +156,7 @@ const ResumeData: React.FC<ResumeDataProps> = ({ extractedData }) => {
           <Tr>
             <Th bg={"white"}>Work Experience</Th>
           </Tr>
-          {work_experience.entries.map((entry: any, idx: any) => (
+          {work_experience?.entries?.map((entry: any, idx: any) => (
             <>
               <Tr key={idx}>
                 <Td>Title</Td>
@@ -177,7 +175,7 @@ const ResumeData: React.FC<ResumeDataProps> = ({ extractedData }) => {
           <Tr>
             <Th bg={"white"}>Languages</Th>
           </Tr>
-          {languages.map((language: any, idx: any) => (
+          {languages?.map((language: any, idx: any) => (
             <>
               <Tr key={idx}>
                 <Td>{language.name}</Td>
@@ -189,7 +187,7 @@ const ResumeData: React.FC<ResumeDataProps> = ({ extractedData }) => {
           <Tr>
             <Th bg={"white"}>Skills</Th>
           </Tr>
-          {skills.map((skill: any, idx: any) => (
+          {skills?.map((skill: any, idx: any) => (
             <>
               {" "}
               <Tr key={idx}>
