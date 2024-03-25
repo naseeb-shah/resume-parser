@@ -3,11 +3,7 @@ import axios from "axios";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { parseResumeFromPdf } from "../lib/parse-resume-from-pdf";
-import {
-  getHasUsedAppBefore,
-  saveStateToLocalStorage,
-} from "../lib/redux/local-storage";
-import { type ShowForm, initialSettings } from "../lib/redux/settingsSlice";
+
 import { useRouter } from "next/navigation";
 // import addPdfSrc from "public/assets/add-pdf.svg";
 import addPdfSrc from "../../../public/assets/add-pdf.svg";
@@ -92,11 +88,6 @@ export const ResumeDropzone = ({
 
   const onImportClick = async () => {
     const resume = await parseResumeFromPdf(file.fileUrl);
-    const settings = deepClone(initialSettings);
-
-    // Set formToShow settings based on uploaded resume if users have used the app before
-
-    saveStateToLocalStorage({ resume, settings });
   };
 
   return (

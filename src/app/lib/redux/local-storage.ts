@@ -1,4 +1,4 @@
-import type { RootState } from "lib/redux/store";
+import type { RootState } from "../../lib/redux/store";
 
 // Reference: https://dev.to/igorovic/simplest-way-to-persist-redux-state-to-localstorage-e67
 

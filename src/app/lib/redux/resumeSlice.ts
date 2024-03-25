@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "lib/redux/store";
+import type { RootState } from "../../lib/redux/store";
 import type {
   FeaturedSkill,
   Resume,
@@ -8,8 +8,8 @@ import type {
   ResumeProject,
   ResumeSkills,
   ResumeWorkExperience,
-} from "lib/redux/types";
-import type { ShowForm } from "lib/redux/settingsSlice";
+} from "../../lib/redux/types";
+import type { ShowForm } from "../../lib/redux/settingsSlice";
 
 export const initialProfile: ResumeProfile = {
   name: "",
@@ -214,12 +214,12 @@ export const {
 } = resumeSlice.actions;
 
 export const selectResume = (state: RootState) => state.resume;
-export const selectProfile = (state: RootState) => state.resume.profile;
-export const selectWorkExperiences = (state: RootState) =>
+export const selectProfile = (state: RootState|any) => state.resume?.profile;
+export const selectWorkExperiences = (state: RootState|any) =>
   state.resume.workExperiences;
-export const selectEducations = (state: RootState) => state.resume.educations;
-export const selectProjects = (state: RootState) => state.resume.projects;
-export const selectSkills = (state: RootState) => state.resume.skills;
-export const selectCustom = (state: RootState) => state.resume.custom;
+export const selectEducations = (state: RootState|any) => state.resume.educations;
+export const selectProjects = (state: RootState|any) => state.resume.projects;
+export const selectSkills = (state: RootState|any) => state.resume.skills;
+export const selectCustom = (state: RootState|any) => state.resume.custom;
 
 export default resumeSlice.reducer;

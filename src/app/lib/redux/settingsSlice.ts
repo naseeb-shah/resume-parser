@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "lib/redux/store";
+import type { RootState } from "../../lib/redux/store";
 
 export interface Settings {
   themeColor: string;
@@ -137,25 +137,25 @@ export const {
 } = settingsSlice.actions;
 
 export const selectSettings = (state: RootState) => state.settings;
-export const selectThemeColor = (state: RootState) => state.settings.themeColor;
+export const selectThemeColor = (state: RootState|any) => state.settings.themeColor;
 
-export const selectFormToShow = (state: RootState) => state.settings.formToShow;
-export const selectShowByForm = (form: ShowForm) => (state: RootState) =>
+export const selectFormToShow = (state: RootState|any) => state.settings.formToShow;
+export const selectShowByForm = (form: ShowForm|any) => (state: RootState|any) =>
   state.settings.formToShow[form];
 
-export const selectFormToHeading = (state: RootState) =>
+export const selectFormToHeading = (state: RootState|any) =>
   state.settings.formToHeading;
-export const selectHeadingByForm = (form: ShowForm) => (state: RootState) =>
+export const selectHeadingByForm = (form: ShowForm|any) => (state: RootState|any) =>
   state.settings.formToHeading[form];
 
-export const selectFormsOrder = (state: RootState) => state.settings.formsOrder;
-export const selectIsFirstForm = (form: ShowForm) => (state: RootState) =>
+export const selectFormsOrder = (state: RootState|any) => state.settings.formsOrder;
+export const selectIsFirstForm = (form: ShowForm|any) => (state: RootState|any) =>
   state.settings.formsOrder[0] === form;
-export const selectIsLastForm = (form: ShowForm) => (state: RootState) =>
+export const selectIsLastForm = (form: ShowForm) => (state: RootState|any) =>
   state.settings.formsOrder[state.settings.formsOrder.length - 1] === form;
 
 export const selectShowBulletPoints =
-  (form: FormWithBulletPoints) => (state: RootState) =>
+  (form: FormWithBulletPoints) => (state: RootState|any) =>
     state.settings.showBulletPoints[form];
 
 export default settingsSlice.reducer;

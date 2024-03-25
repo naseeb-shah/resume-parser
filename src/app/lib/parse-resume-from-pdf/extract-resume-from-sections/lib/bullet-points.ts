@@ -1,4 +1,4 @@
-import type { Lines, TextItem } from "lib/parse-resume-from-pdf/types";
+import type { Lines, TextItem } from "../../../../lib/parse-resume-from-pdf/types";
 
 /**
  * List of bullet points
