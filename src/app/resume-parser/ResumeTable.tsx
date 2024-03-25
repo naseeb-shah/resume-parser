@@ -70,7 +70,9 @@ export const ResumeTable = ({ resume }: { resume: Resume }) => {
     setAnimate(true);
   }, []);
   return (
-    <table className={`mt-2 w-full border text-sm text-gray-900`}>
+    <table
+      className={`mt-2 w-full border mt-10 text-sm text-gray-900 ${animate ? "animate" : ""}`}
+    >
       <tbody className="divide-y text-left align-top">
         <TableRowHeader>Profile</TableRowHeader>
         <TableRow label="Name" value={resume.profile.name} />

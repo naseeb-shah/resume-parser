@@ -14,7 +14,7 @@ const Home = () => {
         details, education history, work experience, skills, and more.
       </Text>
       <Text fontSize="lg" mb={6}>
-        Whether you're a recruiter looking to streamline your hiring process or
+        Whether you re a recruiter looking to streamline your hiring process or
         an individual aiming to present your qualifications effectively,
         ResumeParser is here to help.
       </Text>
@@ -43,10 +43,10 @@ const Home = () => {
         .
       </Text>
       <Text fontSize="lg" mt={6}>
-        We're constantly working on improving ResumeParser to better serve your
-        needs. Whether it's enhancing parsing accuracy, adding new features, or
-        providing better user experience, your feedback is invaluable to us.
-        Don't hesitate to reach out with suggestions or feature requests!
+        We re constantly working on improving ResumeParser to better serve your
+        needs. Whether it s enhancing parsing accuracy, adding new features, or
+        providing better user experience, your feedback is invaluable to us. Don
+        t hesitate to reach out with suggestions or feature requests!
       </Text>
       <Text fontSize="lg" mt={6}>
         Ready to get started? Upload your resume now and experience the
