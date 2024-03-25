@@ -9,7 +9,6 @@ import type {
   ResumeSkills,
   ResumeWorkExperience,
 } from "../../lib/redux/types";
-import type { ShowForm } from "../../lib/redux/settingsSlice";
 
 export const initialProfile: ResumeProfile = {
   name: "",
@@ -141,59 +140,7 @@ export const resumeSlice = createSlice({
       const { value } = action.payload;
       draft.custom.descriptions = value;
     },
-    addSectionInForm: (draft, action: PayloadAction<{ form: ShowForm }>) => {
-      const { form } = action.payload;
-      switch (form) {
-        case "workExperiences": {
-          draft.workExperiences.push(structuredClone(initialWorkExperience));
-          return draft;
-        }
-        case "educations": {
-          draft.educations.push(structuredClone(initialEducation));
-          return draft;
-        }
-        case "projects": {
-          draft.projects.push(structuredClone(initialProject));
-          return draft;
-        }
-      }
-    },
-    moveSectionInForm: (
-      draft,
-      action: PayloadAction<{
-        form: ShowForm;
-        idx: number;
-        direction: "up" | "down";
-      }>
-    ) => {
-      const { form, idx, direction } = action.payload;
-      if (form !== "skills" && form !== "custom") {
-        if (
-          (idx === 0 && direction === "up") ||
-          (idx === draft[form].length - 1 && direction === "down")
-        ) {
-          return draft;
-        }
 
-        const section = draft[form][idx];
-        if (direction === "up") {
-          draft[form][idx] = draft[form][idx - 1];
-          draft[form][idx - 1] = section;
-        } else {
-          draft[form][idx] = draft[form][idx + 1];
-          draft[form][idx + 1] = section;
-        }
-      }
-    },
-    deleteSectionInFormByIdx: (
-      draft,
-      action: PayloadAction<{ form: ShowForm; idx: number }>
-    ) => {
-      const { form, idx } = action.payload;
-      if (form !== "skills" && form !== "custom") {
-        draft[form].splice(idx, 1);
-      }
-    },
     setResume: (draft, action: PayloadAction<Resume>) => {
       return action.payload;
     },
@@ -207,19 +154,18 @@ export const {
   changeProjects,
   changeSkills,
   changeCustom,
-  addSectionInForm,
-  moveSectionInForm,
-  deleteSectionInFormByIdx,
+
   setResume,
 } = resumeSlice.actions;
 
 export const selectResume = (state: RootState) => state.resume;
-export const selectProfile = (state: RootState|any) => state.resume?.profile;
-export const selectWorkExperiences = (state: RootState|any) =>
+export const selectProfile = (state: RootState | any) => state.resume?.profile;
+export const selectWorkExperiences = (state: RootState | any) =>
   state.resume.workExperiences;
-export const selectEducations = (state: RootState|any) => state.resume.educations;
-export const selectProjects = (state: RootState|any) => state.resume.projects;
-export const selectSkills = (state: RootState|any) => state.resume.skills;
-export const selectCustom = (state: RootState|any) => state.resume.custom;
+export const selectEducations = (state: RootState | any) =>
+  state.resume.educations;
+export const selectProjects = (state: RootState | any) => state.resume.projects;
+export const selectSkills = (state: RootState | any) => state.resume.skills;
+export const selectCustom = (state: RootState | any) => state.resume.custom;
 
 export default resumeSlice.reducer;

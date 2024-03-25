@@ -2,7 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import FormData from "form-data";
+
 import { parseResumeFromPdf } from "../lib/parse-resume-from-pdf";
+import fs from "fs";
 
 import { useRouter } from "next/navigation";
 // import addPdfSrc from "public/assets/add-pdf.svg";
@@ -58,28 +61,36 @@ export const ResumeDropzone = ({
   const onInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files) return;
-
     const newFile = files[0];
+
     setNewFile(newFile);
+    const formData = new FormData();
+    formData.append("providers", "senseloaf");
+    formData.append("file", files[0]); // Append the file directly
+    formData.append("fallback_providers", "eden-ai");
 
-    let formData = new FormData();
-    formData.append("resume", newFile);
+    // Now you can send formData to the server using Axios or fetch
 
-    const headers = {
-      Origin: "https://jobs.lever.co",
-      Referer: "https://jobs.lever.co/parse",
-      Accept: "*/*",
-      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    const options = {
+      method: "POST",
+      url: "https://api.edenai.run/v2/ocr/resume_parser",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZDJhZDdiYWUtMmVjMi00YWI2LTljOWMtNmE4YzBkY2ZhZmJmIiwidHlwZSI6ImFwaV90b2tlbiJ9.FLCt2hahNBSD3t-PIfBkh3Pw_2nLvxJpzXhsDUZGGgY",
+
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
     };
-
-    axios
-      .post("https://jobs.lever.co/parseResume", formData, { headers })
-      .then((response) => {
-        console.log("Upload successful:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error uploading file:", error);
-      });
+    console.log("lien 222");
+    // axios
+    //   .request(options)
+    //   .then((response) => {
+    //     console.log(JSON.stringify(response.data));
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   };
   const onRemove = () => {
     setFile(defaultFileState);
@@ -124,20 +135,20 @@ export const ResumeDropzone = ({
           <>
             <p
               className={cx(
-                "pt-3 text-gray-700",
+                "pt-3 text-white-700",
                 !playgroundView && "text-lg font-semibold"
               )}
             >
               Browse a pdf file or drop it here
             </p>
-            <p className="flex text-sm text-gray-500">
-              <LockClosedIcon className="mr-1 mt-1 h-3 w-3 text-gray-400" />
+            <p className="flex text-sm text-white-500">
+              <LockClosedIcon className="mr-1 mt-1 h-3 w-3 text-white" />
               File data is used locally and never leaves your browser
             </p>
           </>
         ) : (
           <div className="flex items-center justify-center gap-3 pt-3">
-            <div className="pl-7 font-semibold text-gray-900">
+            <div className="pl-7 font-semibold text-white-900">
               {file.name} - {getFileSizeString(file.size)}
             </div>
             <button
@@ -182,10 +193,6 @@ export const ResumeDropzone = ({
                   Import and Continue <span aria-hidden="true">→</span>
                 </button>
               )}
-              <p className={cx(" text-gray-500", !playgroundView && "mt-6")}>
-                Note: {!playgroundView ? "Import" : "Parser"} works best on
-                single column resume
-              </p>
             </>
           )}
         </div>

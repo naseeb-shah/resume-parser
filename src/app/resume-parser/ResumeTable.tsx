@@ -25,10 +25,14 @@ const TableRow = ({
   className?: string | false;
 }) => (
   <tr className={cx("divide-x", className)}>
-    <th className="px-3 py-2 font-medium" scope="row">
+    <th
+      className="px-3 py-2 font-medium"
+      scope="row"
+      style={{ color: "white" }}
+    >
       {label}
     </th>
-    <td className="w-full px-3 py-2">
+    <td className="w-full px-3 py-2" style={{ color: "white" }}>
       {typeof value === "string"
         ? value
         : value.map((x, idx) => (

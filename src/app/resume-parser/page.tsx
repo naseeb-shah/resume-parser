@@ -8,38 +8,284 @@ import { groupLinesIntoSections } from "../lib/parse-resume-from-pdf/group-lines
 import { extractResumeFromSections } from "../lib/parse-resume-from-pdf/extract-resume-from-sections";
 import { ResumeDropzone } from "../components/ResumeDropzone";
 import { cx } from "../lib/cx";
-import { Heading, Link, Paragraph } from "../components/documentation";
+import { Link, Paragraph } from "../components/documentation";
 import { ResumeTable } from "../resume-parser/ResumeTable";
 
-import { Box, Flex } from "@chakra-ui/react";
-
-const RESUME_EXAMPLES = [
-  {
-    fileUrl: "resume-example/laverne-resume.pdf",
-    description: (
-      <span>
-        Borrowed from University of La Verne Career Center -{" "}
-        <Link href="https://laverne.edu/careers/wp-content/uploads/sites/15/2010/12/Undergraduate-Student-Resume-Examples.pdf">
-          Link
-        </Link>
-      </span>
-    ),
+import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import ResumeData, {
+  ResumeDataProps,
+} from "../components/documentation/tableS";
+let data: ResumeDataProps = {
+  personal_infos: {
+    name: {
+      first_name: "Naseeb",
+      last_name: "Khan",
+      raw_name: "Naseeb Khan",
+      middle: "",
+      title: "",
+      prefix: null,
+      sufix: null,
+    },
+    address: {
+      formatted_location: "Haryana India",
+      postal_code: "",
+      region: "Haryana",
+      country: "India",
+      country_code: "+0",
+      raw_input_location: null,
+      street: "",
+      street_number: null,
+      appartment_number: null,
+      city: "",
+    },
+    self_summary:
+      "SUMMARY SUMMARY Results - driven Full Stack Developer with expertise in React , React Native , Express , Node.js , and MongoDB . Proven ability to design , develop , and deploy end - to - end applications , specializing in responsive interfaces and cross - platform mobile development . Skilled in problem - solving and collaboration within Agile methodologies . Eager to contribute technical proficiency and passion for innovation to create exceptional solutions .",
+    objective: "",
+    date_of_birth: null,
+    place_of_birth: null,
+    phones: ["08396990092"],
+    mails: ["lineo3551@gmail.com"],
+    urls: [
+      "https://play.google.com/store/apps/details?id=com.aekatra.customers",
+      "https://quickiii.com/",
+      "https://shahstore.vercel.app/",
+      "https://seller.quickiii.com/dashboard",
+      "https://medicallaboratorytechnology-naseeb-shah.vercel.app/",
+      "https://naseeb-shah.github.io/Portfolio-/",
+    ],
+    fax: [],
+    current_profession: "Full   stack Web Developer",
+    gender: null,
+    nationality: null,
+    martial_status: null,
+    current_salary: null,
   },
-  {
-    fileUrl: "resume-example/openresume-resume.pdf",
-    description: (
-      <span>
-        Created with OpenResume resume builder -{" "}
-        <Link href="/resume-builder">Link</Link>
-      </span>
-    ),
+  education: {
+    total_years_education: null,
+    entries: [
+      {
+        title: "Full Stack Web",
+        start_date: "01-05-2021",
+        end_date: "01-07-2022",
+        location: {
+          formatted_location: "Bengaluru  India",
+          postal_code: null,
+          region: null,
+          country: null,
+          country_code: null,
+          raw_input_location: null,
+          street: null,
+          street_number: null,
+          appartment_number: null,
+          city: null,
+        },
+        establishment: "Masai School",
+        description: null,
+        gpa: "",
+        accreditation: "",
+      },
+      {
+        title: "Bachelor of Commerce",
+        start_date: "01-06-2018",
+        end_date: "01-07-2021",
+        location: {
+          formatted_location: "Haryana  India",
+          postal_code: null,
+          region: null,
+          country: null,
+          country_code: null,
+          raw_input_location: null,
+          street: null,
+          street_number: null,
+          appartment_number: null,
+          city: null,
+        },
+        establishment: "Kurukshetra University",
+        description: null,
+        gpa: "",
+        accreditation: "",
+      },
+    ],
   },
-];
+  work_experience: {
+    total_years_experience: "1.4",
+    entries: [
+      {
+        title: "Full   stack Web Developer",
+        start_date: "01-11-2022",
+        end_date: null,
+        company: "Aekatr Technology and Services Pvt . Ltd.   Quickiii",
+        location: {
+          formatted_location: "Panipat , India",
+          postal_code: null,
+          region: null,
+          country: null,
+          country_code: null,
+          raw_input_location: null,
+          street: null,
+          street_number: null,
+          appartment_number: null,
+          city: null,
+        },
+        description: "",
+        industry: null,
+      },
+    ],
+  },
+  languages: [
+    {
+      name: "English",
+      code: null,
+    },
+    {
+      name: "Hindi",
+      code: null,
+    },
+  ],
+  skills: [
+    {
+      name: "Html",
+      type: "Hard Skills",
+    },
+    {
+      name: "Cascading Style Sheets",
+      type: "Hard Skills",
+    },
+    {
+      name: "Javascript",
+      type: "Hard Skills",
+    },
+    {
+      name: "React",
+      type: "Hard Skills",
+    },
+    {
+      name: "Redux (Javascript Library)",
+      type: "Hard Skills",
+    },
+    {
+      name: "Node Js",
+      type: "Hard Skills",
+    },
+    {
+      name: "React Native",
+      type: "Hard Skills",
+    },
+    {
+      name: "Data Base Management System Software",
+      type: "Hard Skills",
+    },
+    {
+      name: "Github",
+      type: "Hard Skills",
+    },
+    {
+      name: "Postman",
+      type: "Hard Skills",
+    },
+    {
+      name: "Typescript",
+      type: "Hard Skills",
+    },
+    {
+      name: "Communication",
+      type: "Soft Skills",
+    },
+    {
+      name: "Teamwork",
+      type: "Soft Skills",
+    },
+    {
+      name: "Problem Solving",
+      type: "Soft Skills",
+    },
+    {
+      name: "Time Management",
+      type: "Soft Skills",
+    },
+    {
+      name: "Language",
+      type: "Soft Skills",
+    },
+    {
+      name: "Solution Stack",
+      type: "Hard Skills",
+    },
+    {
+      name: "Software Development",
+      type: "Hard Skills",
+    },
+    {
+      name: "Node.Js",
+      type: "Hard Skills",
+    },
+    {
+      name: "Design",
+      type: "Hard Skills",
+    },
+    {
+      name: "Application Software",
+      type: "Hard Skills",
+    },
+    {
+      name: "Api",
+      type: "Hard Skills",
+    },
+    {
+      name: "Collaboration",
+      type: "Soft Skills",
+    },
+    {
+      name: "Agile Software Development",
+      type: "Hard Skills",
+    },
+    {
+      name: "Innovation",
+      type: "Soft Skills",
+    },
+    {
+      name: "Web Developer",
+      type: "Hard Skills",
+    },
+    {
+      name: "React.Js",
+      type: "Hard Skills",
+    },
+    {
+      name: "Web Applications",
+      type: "Hard Skills",
+    },
+    {
+      name: "Code",
+      type: "Hard Skills",
+    },
+    {
+      name: "Management",
+      type: "Soft Skills",
+    },
+    {
+      name: "Web Server",
+      type: "Hard Skills",
+    },
+    {
+      name: "Database Administration",
+      type: "Hard Skills",
+    },
+    {
+      name: "Express.Js",
+      type: "Hard Skills",
+    },
+  ],
+};
 
-const defaultFileUrl = RESUME_EXAMPLES[0]["fileUrl"];
+const defaultFileUrl = "https://";
 export default function ResumeParser() {
   const [fileUrl, setFileUrl] = useState(defaultFileUrl);
   const [textItems, setTextItems] = useState<TextItems>([]);
+
+  const [resumeData, setResumeData] = useState<ResumeDataProps>(data);
+
+  const [status, setStatus] = useState<"nodata" | "data" | "show">();
   const lines = groupTextItemsIntoLines(textItems || []);
   const sections = groupLinesIntoSections(lines);
   const resume = extractResumeFromSections(sections);
@@ -54,24 +300,24 @@ export default function ResumeParser() {
 
   return (
     <>
-      <Flex w={"100%"} bg={"white"}>
-        <Box w={"50%"}>
-          <Heading level={2} className="!mt-[1.2em]">
-            Resume Parsing Results
-          </Heading>
-          <ResumeTable resume={resume} />
+      <div
+        className="mt-4"
+        style={{ width: "80%", margin: "auto", marginTop: 50 }}
+      >
+        <ResumeDropzone
+          onFileUrlChange={(fileUrl) => setFileUrl(fileUrl || defaultFileUrl)}
+          playgroundView={true}
+        />
+      </div>
+      <Flex w={"100%"} p={"2%"}>
+        <Box w={"45%"} mr={"3%"}>
+          <Container maxW="container.md" mt={10}>
+            !loading&& <ResumeData extractedData={resumeData} />
+          </Container>
         </Box>
-        <Box w={"50%"}>
-          <section className="max-w-[600px] grow">
-            <div className="mt-3">
-              <ResumeDropzone
-                onFileUrlChange={(fileUrl) =>
-                  setFileUrl(fileUrl || defaultFileUrl)
-                }
-                playgroundView={true}
-              />
-            </div>
-          </section>
+        <Box w={"45%"}>
+          <Text>Parsing Results</Text>
+          <ResumeTable resume={resume} />
         </Box>
       </Flex>
     </>
