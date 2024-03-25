@@ -32,10 +32,10 @@ const Navbar = () => {
         justifyContent={"space-between"}
       >
         <Text mr="4" as={Link} href="/resume-parser">
-          Resume Parser
+          Resume Parser -A
         </Text>
-        <Text mr={"8"} as={Link} href={"/"}>
-          About
+        <Text mr={"8"} as={Link} href={"/parser-1"}>
+          Resume Parser -B
         </Text>
       </Flex>
     </Flex>

@@ -6,7 +6,7 @@ import {
 } from "../lib/redux/resumeSlice";
 import { deepClone } from "../lib/deep-clone";
 import { cx } from "../lib/cx";
-
+import { useState, useEffect } from "react";
 const TableRowHeader = ({ children }: { children: React.ReactNode }) => (
   <tr className="divide-x bg-gray-50">
     <th className="px-3 py-2 font-semibold" scope="colgroup" colSpan={2}>
@@ -63,8 +63,14 @@ export const ResumeTable = ({ resume }: { resume: Resume }) => {
   if (featuredSkills) {
     skills.unshift(featuredSkills);
   }
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    // Trigger animation on component mount
+    setAnimate(true);
+  }, []);
   return (
-    <table className="mt-2 w-full border text-sm text-gray-900">
+    <table className={`mt-2 w-full border text-sm text-gray-900`}>
       <tbody className="divide-y text-left align-top">
         <TableRowHeader>Profile</TableRowHeader>
         <TableRow label="Name" value={resume.profile.name} />

@@ -307,18 +307,11 @@ export default function ResumeParser() {
         <ResumeDropzone
           onFileUrlChange={(fileUrl) => setFileUrl(fileUrl || defaultFileUrl)}
           playgroundView={true}
+          show={false}
         />
       </div>
-      <Flex w={"100%"} p={"2%"}>
-        <Box w={"45%"} mr={"3%"}>
-          <Container maxW="container.md" mt={10}>
-            !loading&& <ResumeData data={data} />
-          </Container>
-        </Box>
-        <Box w={"45%"}>
-          <Text>Parsing Results</Text>
-          <ResumeTable resume={resume} />
-        </Box>
+      <Flex w={"80%"} m={"auto"}>
+        <ResumeTable resume={resume} />
       </Flex>
     </>
   );

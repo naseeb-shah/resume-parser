@@ -26,7 +26,7 @@ export type FeatureSet =
   | [
       (item: TextItem) => RegExpMatchArray | null,
       FeatureScore,
-      ReturnMatchingTextOnly
+      ReturnMatchingTextOnly,
     ];
 
 export interface TextScore {

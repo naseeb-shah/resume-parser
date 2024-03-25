@@ -1,4 +1,5 @@
 import { Box, Table, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 interface PersonalInfo {
   name?: {
     first_name?: string;
@@ -106,9 +107,17 @@ export interface ResumeDataProps {
 const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
   const { personal_infos, education, work_experience, languages, skills } =
     props.data;
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    // Trigger animation on component mount
+    setAnimate(true);
+  }, []);
 
   return (
-    <Box className="mt-2 w-full border text-sm white">
+    <Box
+      className={`mt-2 w-full border text-sm white ${animate ? "animate" : ""}`}
+    >
       <Table>
         <Tbody className="divide-y text-left align-top">
           <Tr>
