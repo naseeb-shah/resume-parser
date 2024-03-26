@@ -343,14 +343,13 @@ export const ResumeDropzone = ({
       method: "POST",
       url: "https://api.edenai.run/v2/ocr/resume_parser",
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZDJhZDdiYWUtMmVjMi00YWI2LTljOWMtNmE4YzBkY2ZhZmJmIiwidHlwZSI6ImFwaV90b2tlbiJ9.FLCt2hahNBSD3t-PIfBkh3Pw_2nLvxJpzXhsDUZGGgY",
+        Authorization: `Bearer ${process.env.TOKEN}`,
 
         "Content-Type": "multipart/form-data",
       },
       data: formData,
     };
-    console.log("lien 222");
+    console.log(process.env);
     // axios
     //   .request(options)
     //   .then((response) => {
