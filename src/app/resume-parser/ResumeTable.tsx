@@ -89,7 +89,7 @@ export const ResumeTable = ({ resume }: { resume: Resume }) => {
   }, []);
   return (
     <table
-      className={`mt-2 w-full border mt-20 mb-40 text-sm text-gray-900 ${animate ? "animate" : ""}`}
+      className={`mt-2 w-full border mt-20 mb-20 text-sm text-gray-900 ${animate ? "animate" : ""}`}
     >
       <Button
         colorScheme="blue"

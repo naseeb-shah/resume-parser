@@ -16,6 +16,10 @@ export default function RootLayout({
       <body>
         <Navbar />
         <Providers>{children}</Providers>
+        <footer style={{ textAlign: "center" }}>
+          Made with ❤️ &copy; {new Date().getFullYear()} Deen Shah Scion All
+          Rights Reserved.
+        </footer>
       </body>
     </html>
   );

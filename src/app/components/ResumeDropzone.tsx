@@ -331,7 +331,17 @@ export const ResumeDropzone = ({
     const files = event.target.files;
     if (!files) return;
     const newFile = files[0];
-
+    if (!newFile.name.endsWith(".pdf")) {
+      toast({
+        title: "FILE TYPE ERROR",
+        position: "top",
+        description: "Please Choose PDF file.",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
     if (newFile.size > 1024 * 1024) {
       toast({
         title: "FILE SIZE ERROR",
