@@ -1,5 +1,7 @@
 # Resume Parser
 
+- **Live**: [LIVE](https://resume-parser-zeta.vercel.app/)
+
 Resume Parser is a web application built with Next.js that allows users to parse and organize resume data. It simplifies the process of extracting essential information from resumes, such as personal details, education history, work experience, skills, and more.
 
 ## Features

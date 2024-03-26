@@ -369,7 +369,7 @@ export const ResumeDropzone = ({
       method: "POST",
       url: "https://api.edenai.run/v2/ocr/resume_parser",
       headers: {
-        Authorization: `Bearer ${process.env.TOKEN}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN_AUTH}`,
 
         "Content-Type": "multipart/form-data",
       },
