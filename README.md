@@ -12,9 +12,9 @@ Resume Parser is a web application built with Next.js that allows users to parse
 
 ##
 
-![Image Description](/a.png)
-![Image Description](/b.png)
-![Image Description](/c.png)
+![Image Description](/public/a.png)
+![Image Description](/public/b.png)
+![Image Description](/public/c.png)
 
 ## Installation
 
