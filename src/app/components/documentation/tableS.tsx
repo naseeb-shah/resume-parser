@@ -105,7 +105,7 @@ export interface ResumeDataProps {
 }
 
 const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
-  const { personal_infos, education, work_experience, languages, skills } =
+  const { personal_infos, education, work_experience, languages, skills, x } =
     props.data;
   const [animate, setAnimate] = useState(false);
 
@@ -129,7 +129,8 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
     // Trigger animation on component mount
     setAnimate(true);
   }, []);
-
+  const updatedSkills = skills?.map((s: any) => s.name).join(" , ");
+  console.log(updatedSkills);
   return (
     <>
       <Box
@@ -150,64 +151,78 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
             <Tr>
               <Th bg={"white"}>Personal Information</Th>
             </Tr>
-            <Tr>
-              <Td>Name</Td>
-              <Td>{`${personal_infos?.name.first_name} ${personal_infos?.name.last_name}`}</Td>
-            </Tr>
-            <Tr>
-              <Td>Email</Td>
-              <Td>{personal_infos?.mails.join(", ")}</Td>
-            </Tr>
-            <Tr>
-              <Td>Phone</Td>
-              <Td>{personal_infos?.phones.join(", ")}</Td>
-            </Tr>
-            <Tr>
-              <Td>Location</Td>
-              <Td>{personal_infos?.address.formatted_location}</Td>
-            </Tr>
-            <Tr>
-              <Td>Summary</Td>
-              <Td>{personal_infos?.self_summary}</Td>
-            </Tr>
+            {personal_infos && (
+              <>
+                <Tr>
+                  <Td>Name</Td>
+
+                  <Td>{`${personal_infos?.name.first_name} ${personal_infos?.name.last_name}`}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Email</Td>
+                  <Td>{personal_infos?.mails?.join(", ")}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Phone</Td>
+                  <Td>{personal_infos?.phones?.join(", ")}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Location</Td>
+                  <Td>{personal_infos?.address.formatted_location}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Summary</Td>
+                  <Td>{personal_infos?.self_summary}</Td>
+                </Tr>
+              </>
+            )}
             <Tr>
               <Th>Education</Th>
             </Tr>
-            {education.entries?.map((entry: any, idx: any) => (
+            {education && (
               <>
-                <Tr key={idx + entry?.title}>
-                  <Td>Title</Td>
-                  <Td>{entry?.title}</Td>
-                </Tr>
-                <Tr>
-                  <Td>Date</Td>
-                  <Td>{`${entry.start_date} - ${entry.end_date}`}</Td>
-                </Tr>
-                <Tr>
-                  <Td>Establishment</Td>
-                  <Td>{entry.establishment}</Td>
-                </Tr>
+                {education.entries?.map((entry: any, idx: any) => (
+                  <>
+                    <Tr key={idx + entry?.title}>
+                      <Td>Title</Td>
+                      <Td>{entry?.title}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Date</Td>
+                      <Td>{`${entry.start_date} - ${entry.end_date}`}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Establishment</Td>
+                      <Td>{entry.establishment}</Td>
+                    </Tr>
+                  </>
+                ))}
               </>
-            ))}
+            )}
             <Tr>
               <Th bg={"white"}>Work Experience</Th>
             </Tr>
-            {work_experience?.entries?.map((entry: any, idx: any) => (
+            {work_experience && (
               <>
-                <Tr key={idx + entry?.title}>
-                  <Td>Title</Td>
-                  <Td>{entry?.title}</Td>
-                </Tr>
-                <Tr>
-                  <Td>Date</Td>
-                  <Td>{`${entry.start_date} - ${entry.end_date}`}</Td>
-                </Tr>
-                <Tr>
-                  <Td>Company</Td>
-                  <Td>{entry.company}</Td>
-                </Tr>
+                {" "}
+                {work_experience?.entries?.map((entry: any, idx: any) => (
+                  <>
+                    <Tr key={idx + entry?.title}>
+                      <Td>Title</Td>
+                      <Td>{entry?.title}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Date</Td>
+                      <Td>{`${entry.start_date} - ${entry.end_date}`}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Company</Td>
+                      <Td>{entry.company}</Td>
+                    </Tr>
+                  </>
+                ))}
               </>
-            ))}
+            )}
             <Tr>
               <Th bg={"white"}>Languages</Th>
             </Tr>
@@ -222,15 +237,10 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
             <Tr>
               <Th bg={"white"}>Skills</Th>
             </Tr>
-            {skills?.map((skill: any, idx: any) => (
-              <>
-                {" "}
-                <Tr key={idx + skill?.name}>
-                  <Td>{skill.name}</Td>
-                  <Td>{skill.type}</Td>
-                </Tr>
-              </>
-            ))}
+            <Tr>
+              <Th></Th>
+              <Th color={"white"}>{updatedSkills}</Th>
+            </Tr>
           </Tbody>
         </Table>
       </Box>
