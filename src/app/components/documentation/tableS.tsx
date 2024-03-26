@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Table, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 interface PersonalInfo {
@@ -130,7 +132,7 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
     setAnimate(true);
   }, []);
   const updatedSkills = skills?.map((s: any) => s.name).join(" , ");
-  console.log(updatedSkills);
+
   return (
     <>
       <Box

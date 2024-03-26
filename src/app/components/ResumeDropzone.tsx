@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import axios from "axios";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
@@ -330,7 +331,8 @@ export const ResumeDropzone = ({
     if (!files) return;
     const newFile = files[0];
 
-    if (newFile.size > 300 * 300) {
+    console.log(process.env, process.env.TOKEN);
+    if (newFile.size > 1024 * 1024) {
       toast({
         title: "FILE SIZE ERROR",
         position: "top",
@@ -373,16 +375,27 @@ export const ResumeDropzone = ({
       },
       data: formData,
     };
-    console.log(process.env);
-    // axios
-    //   .request(options)
-    //   .then((response) => {
-    //     console.log(response.data.senseloaf.extracted_data);
-    //     setResumeData(response.data.senseloaf.extracted_data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
+    axios
+      .request(options)
+      .then((response) => {
+        console.log(response.data);
+        if (response?.data?.senseloaf?.extracted_data) {
+          setResumeData(response?.data?.senseloaf?.extracted_data);
+        } else {
+          setResumeData(response?.data?.["eden-ai"]?.extracted_data);
+        }
+      })
+      .catch((error) => {
+        toast({
+          title: "PARSING ERROR",
+          position: "top",
+          description: "SOME THING WENT WRONG !",
+          status: "warning",
+          duration: 9000,
+          isClosable: true,
+        });
+        console.error(error);
+      });
   };
   const onRemove = () => {
     setFile(defaultFileState);

@@ -1,3 +1,5 @@
+"use client";
+
 import { Fragment } from "react";
 import type { Resume } from "../lib/redux/types";
 import {
