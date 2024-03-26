@@ -4,7 +4,7 @@ import axios from "axios";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import FormData from "form-data";
-import { useToast } from "@chakra-ui/react";
+import { Flex, useToast } from "@chakra-ui/react";
 import { parseResumeFromPdf } from "../lib/parse-resume-from-pdf";
 import fs from "fs";
 
@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import addPdfSrc from "../../../public/assets/add-pdf.svg";
 import Image from "next/image";
 import { cx } from "../lib/cx";
-import { deepClone } from "../lib/deep-clone";
+import { Spinner } from "@chakra-ui/react";
 import ResumeData, { ResumeDataProps } from "./documentation/tableS";
 
 const defaultFileState = {
@@ -299,6 +299,7 @@ export const ResumeDropzone = ({
   const [file, setFile] = useState(defaultFileState);
   const [isHoveredOnDropzone, setIsHoveredOnDropzone] = useState(false);
   const [hasNonPdfFile, setHasNonPdfFile] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [resumeData, setResumeData] = useState<ResumeDataProps>(data);
 
   const hasFile = Boolean(file.name);
@@ -331,7 +332,6 @@ export const ResumeDropzone = ({
     if (!files) return;
     const newFile = files[0];
 
-    console.log(process.env, process.env.TOKEN);
     if (newFile.size > 1024 * 1024) {
       toast({
         title: "FILE SIZE ERROR",
@@ -358,6 +358,7 @@ export const ResumeDropzone = ({
     if (!show) {
       return;
     }
+    setLoading(true);
     const formData = new FormData();
     formData.append("providers", "senseloaf");
     formData.append("file", files[0]); // Append the file directly
@@ -384,6 +385,7 @@ export const ResumeDropzone = ({
         } else {
           setResumeData(response?.data?.["eden-ai"]?.extracted_data);
         }
+        setLoading(false);
       })
       .catch((error) => {
         toast({
@@ -394,6 +396,7 @@ export const ResumeDropzone = ({
           duration: 9000,
           isClosable: true,
         });
+        setLoading(false);
         console.error(error);
       });
   };
@@ -506,7 +509,18 @@ export const ResumeDropzone = ({
           </div>
         </div>
       </div>
-      {show && <ResumeData data={resumeData} />}
+      {show && !loading ? <ResumeData data={resumeData} /> : null}
+      {loading && (
+        <Flex justifyContent={"center"}>
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        </Flex>
+      )}
     </>
   );
 };
