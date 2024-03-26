@@ -80,7 +80,3 @@ For inquiries or support, please contact:
 - **GitHub**: [Your GitHub Profile](https://github.com/naseeb-shah)
 - **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/naseeb-khan-deenshah/)
 - **Email**: shahnaseeb1010@email.com
-
----
-
-Feel free to customize this `README.md` further to include additional information specific to your project and its requirements!
