@@ -77,6 +77,6 @@ Contributions to Resume Parser are welcome! If you find any bugs or have suggest
 
 For inquiries or support, please contact:
 
-- **GitHub**: [Your GitHub Profile](https://github.com/naseeb-shah)
-- **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/naseeb-khan-deenshah/)
+- **GitHub**: [GitHub Profile](https://github.com/naseeb-shah)
+- **LinkedIn**: [LinkedIn Profile](https://www.linkedin.com/in/naseeb-khan-deenshah/)
 - **Email**: shahnaseeb1010@email.com
