@@ -3,7 +3,7 @@ import axios from "axios";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import FormData from "form-data";
-
+import { useToast } from "@chakra-ui/react";
 import { parseResumeFromPdf } from "../lib/parse-resume-from-pdf";
 import fs from "fs";
 
@@ -293,6 +293,8 @@ export const ResumeDropzone = ({
   playgroundView?: boolean;
   show?: boolean;
 }) => {
+  const toast = useToast();
+
   const [file, setFile] = useState(defaultFileState);
   const [isHoveredOnDropzone, setIsHoveredOnDropzone] = useState(false);
   const [hasNonPdfFile, setHasNonPdfFile] = useState(false);
@@ -328,7 +330,29 @@ export const ResumeDropzone = ({
     if (!files) return;
     const newFile = files[0];
 
+    if (newFile.size > 300 * 300) {
+      toast({
+        title: "FILE SIZE ERROR",
+        position: "top",
+        description: "File size exceeds the maximum limit of 1MB.",
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      return;
+    }
     setNewFile(newFile);
+    toast({
+      title: "File Uploaded",
+      position: "top",
+      description:
+        "Your file has been uploaded successfully. Analysis of your file is in progress. This may take a few moments.",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+
     if (!show) {
       return;
     }
