@@ -278,7 +278,7 @@ let data: ResumeDataProps = {
   ],
 };
 
-const defaultFileUrl = "../example/a.pdf";
+const defaultFileUrl = "/example/a.pdf";
 export default function ResumeParser() {
   const [fileUrl, setFileUrl] = useState(defaultFileUrl);
   const [textItems, setTextItems] = useState<TextItems>([]);

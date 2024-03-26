@@ -108,6 +108,7 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
   const { personal_infos, education, work_experience, languages, skills } =
     props.data;
   const [animate, setAnimate] = useState(false);
+
   const handleDownload = () => {
     const jsonData = JSON.stringify(props.data);
 
@@ -174,9 +175,9 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
             </Tr>
             {education.entries?.map((entry: any, idx: any) => (
               <>
-                <Tr key={idx}>
+                <Tr key={idx + entry?.title}>
                   <Td>Title</Td>
-                  <Td>{entry.title}</Td>
+                  <Td>{entry?.title}</Td>
                 </Tr>
                 <Tr>
                   <Td>Date</Td>
@@ -193,9 +194,9 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
             </Tr>
             {work_experience?.entries?.map((entry: any, idx: any) => (
               <>
-                <Tr key={idx}>
+                <Tr key={idx + entry?.title}>
                   <Td>Title</Td>
-                  <Td>{entry.title}</Td>
+                  <Td>{entry?.title}</Td>
                 </Tr>
                 <Tr>
                   <Td>Date</Td>
@@ -212,10 +213,9 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
             </Tr>
             {languages?.map((language: any, idx: any) => (
               <>
-                <Tr key={idx}>
-                  <Td>{language.name}</Td>
-                  <Td></Td>{" "}
-                  {/* You can add language proficiency here if available */}
+                <Tr key={idx + language?.name}>
+                  <Td>{language?.name}</Td>
+                  <Td></Td>
                 </Tr>
               </>
             ))}
@@ -225,7 +225,7 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
             {skills?.map((skill: any, idx: any) => (
               <>
                 {" "}
-                <Tr key={idx}>
+                <Tr key={idx + skill?.name}>
                   <Td>{skill.name}</Td>
                   <Td>{skill.type}</Td>
                 </Tr>

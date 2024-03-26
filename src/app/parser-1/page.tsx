@@ -10,7 +10,7 @@ import { ResumeDropzone } from "../components/ResumeDropzone";
 
 import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
-const defaultFileUrl = "https://";
+const defaultFileUrl = "example/a.pdf";
 export default function ResumeParser() {
   const [fileUrl, setFileUrl] = useState(defaultFileUrl);
   const [textItems, setTextItems] = useState<TextItems>([]);
