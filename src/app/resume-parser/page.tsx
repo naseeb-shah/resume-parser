@@ -278,7 +278,7 @@ let data: ResumeDataProps = {
   ],
 };
 
-const defaultFileUrl = "https://";
+const defaultFileUrl = "../example/a.pdf";
 export default function ResumeParser() {
   const [fileUrl, setFileUrl] = useState(defaultFileUrl);
   const [textItems, setTextItems] = useState<TextItems>([]);
@@ -300,6 +300,19 @@ export default function ResumeParser() {
 
   return (
     <>
+      <Text
+        fontSize="xl"
+        fontWeight="bold"
+        textAlign={"center"}
+        css={{
+          background: "linear-gradient(45deg, #3498db, #2ecc71)",
+          WebkitBackgroundClip: "text",
+          color: "transparent",
+          fontSize: "24px",
+        }}
+      >
+        PARSER - A
+      </Text>
       <div
         className="mt-4"
         style={{ width: "80%", margin: "auto", marginTop: 50 }}

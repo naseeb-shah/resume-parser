@@ -7,13 +7,8 @@ import { groupTextItemsIntoLines } from "../lib/parse-resume-from-pdf/group-text
 import { groupLinesIntoSections } from "../lib/parse-resume-from-pdf/group-lines-into-sections";
 import { extractResumeFromSections } from "../lib/parse-resume-from-pdf/extract-resume-from-sections";
 import { ResumeDropzone } from "../components/ResumeDropzone";
-import { cx } from "../lib/cx";
-import { Link, Paragraph } from "../components/documentation";
 
 import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
-import ResumeData, {
-  ResumeDataProps,
-} from "../components/documentation/tableS";
 
 const defaultFileUrl = "https://";
 export default function ResumeParser() {
@@ -35,6 +30,19 @@ export default function ResumeParser() {
 
   return (
     <>
+      <Text
+        fontSize="xl"
+        fontWeight="bold"
+        textAlign={"center"}
+        css={{
+          background: "linear-gradient(45deg, #3498db, #2ecc71)",
+          WebkitBackgroundClip: "text",
+          color: "transparent",
+          fontSize: "24px",
+        }}
+      >
+        PARSER - B
+      </Text>
       <div
         className="mt-4"
         style={{ width: "80%", margin: "auto", marginTop: 50 }}

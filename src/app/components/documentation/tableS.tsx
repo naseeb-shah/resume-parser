@@ -1,4 +1,4 @@
-import { Box, Table, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { Box, Table, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 interface PersonalInfo {
   name?: {
@@ -108,6 +108,21 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
   const { personal_infos, education, work_experience, languages, skills } =
     props.data;
   const [animate, setAnimate] = useState(false);
+  const handleDownload = () => {
+    const jsonData = JSON.stringify(props.data);
+
+    const blob = new Blob([jsonData], { type: "application/json" });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "resume_data.json";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+  };
 
   useEffect(() => {
     // Trigger animation on component mount
@@ -115,99 +130,111 @@ const ResumeData: React.FC<{ [key: string]: any }> = (props) => {
   }, []);
 
   return (
-    <Box
-      className={`mt-2 w-full border text-sm white ${animate ? "animate" : ""}`}
-    >
-      <Table>
-        <Tbody className="divide-y text-left align-top">
-          <Tr>
-            <Th bg={"white"}>Personal Information</Th>
-          </Tr>
-          <Tr>
-            <Td>Name</Td>
-            <Td>{`${personal_infos?.name.first_name} ${personal_infos?.name.last_name}`}</Td>
-          </Tr>
-          <Tr>
-            <Td>Email</Td>
-            <Td>{personal_infos?.mails.join(", ")}</Td>
-          </Tr>
-          <Tr>
-            <Td>Phone</Td>
-            <Td>{personal_infos?.phones.join(", ")}</Td>
-          </Tr>
-          <Tr>
-            <Td>Location</Td>
-            <Td>{personal_infos?.address.formatted_location}</Td>
-          </Tr>
-          <Tr>
-            <Td>Summary</Td>
-            <Td>{personal_infos?.self_summary}</Td>
-          </Tr>
-          <Tr>
-            <Th>Education</Th>
-          </Tr>
-          {education.entries?.map((entry: any, idx: any) => (
-            <>
-              <Tr key={idx}>
-                <Td>Title</Td>
-                <Td>{entry.title}</Td>
-              </Tr>
-              <Tr>
-                <Td>Date</Td>
-                <Td>{`${entry.start_date} - ${entry.end_date}`}</Td>
-              </Tr>
-              <Tr>
-                <Td>Establishment</Td>
-                <Td>{entry.establishment}</Td>
-              </Tr>
-            </>
-          ))}
-          <Tr>
-            <Th bg={"white"}>Work Experience</Th>
-          </Tr>
-          {work_experience?.entries?.map((entry: any, idx: any) => (
-            <>
-              <Tr key={idx}>
-                <Td>Title</Td>
-                <Td>{entry.title}</Td>
-              </Tr>
-              <Tr>
-                <Td>Date</Td>
-                <Td>{`${entry.start_date} - ${entry.end_date}`}</Td>
-              </Tr>
-              <Tr>
-                <Td>Company</Td>
-                <Td>{entry.company}</Td>
-              </Tr>
-            </>
-          ))}
-          <Tr>
-            <Th bg={"white"}>Languages</Th>
-          </Tr>
-          {languages?.map((language: any, idx: any) => (
-            <>
-              <Tr key={idx}>
-                <Td>{language.name}</Td>
-                <Td></Td>{" "}
-                {/* You can add language proficiency here if available */}
-              </Tr>
-            </>
-          ))}
-          <Tr>
-            <Th bg={"white"}>Skills</Th>
-          </Tr>
-          {skills?.map((skill: any, idx: any) => (
-            <>
-              {" "}
-              <Tr key={idx}>
-                <Td>{skill.name}</Td>
-                <Td>{skill.type}</Td>
-              </Tr>
-            </>
-          ))}
-        </Tbody>
-      </Table>
-    </Box>
+    <>
+      <Box
+        className={`mt-2 w-full border text-sm white ${animate ? "animate" : ""}`}
+      >
+        <Table>
+          <Tbody className="divide-y text-left align-top">
+            <Tr>
+              <Button
+                colorScheme="blue"
+                onClick={handleDownload}
+                textAlign={"center"}
+                m={2}
+              >
+                Download JSON File
+              </Button>
+            </Tr>
+            <Tr>
+              <Th bg={"white"}>Personal Information</Th>
+            </Tr>
+            <Tr>
+              <Td>Name</Td>
+              <Td>{`${personal_infos?.name.first_name} ${personal_infos?.name.last_name}`}</Td>
+            </Tr>
+            <Tr>
+              <Td>Email</Td>
+              <Td>{personal_infos?.mails.join(", ")}</Td>
+            </Tr>
+            <Tr>
+              <Td>Phone</Td>
+              <Td>{personal_infos?.phones.join(", ")}</Td>
+            </Tr>
+            <Tr>
+              <Td>Location</Td>
+              <Td>{personal_infos?.address.formatted_location}</Td>
+            </Tr>
+            <Tr>
+              <Td>Summary</Td>
+              <Td>{personal_infos?.self_summary}</Td>
+            </Tr>
+            <Tr>
+              <Th>Education</Th>
+            </Tr>
+            {education.entries?.map((entry: any, idx: any) => (
+              <>
+                <Tr key={idx}>
+                  <Td>Title</Td>
+                  <Td>{entry.title}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Date</Td>
+                  <Td>{`${entry.start_date} - ${entry.end_date}`}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Establishment</Td>
+                  <Td>{entry.establishment}</Td>
+                </Tr>
+              </>
+            ))}
+            <Tr>
+              <Th bg={"white"}>Work Experience</Th>
+            </Tr>
+            {work_experience?.entries?.map((entry: any, idx: any) => (
+              <>
+                <Tr key={idx}>
+                  <Td>Title</Td>
+                  <Td>{entry.title}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Date</Td>
+                  <Td>{`${entry.start_date} - ${entry.end_date}`}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Company</Td>
+                  <Td>{entry.company}</Td>
+                </Tr>
+              </>
+            ))}
+            <Tr>
+              <Th bg={"white"}>Languages</Th>
+            </Tr>
+            {languages?.map((language: any, idx: any) => (
+              <>
+                <Tr key={idx}>
+                  <Td>{language.name}</Td>
+                  <Td></Td>{" "}
+                  {/* You can add language proficiency here if available */}
+                </Tr>
+              </>
+            ))}
+            <Tr>
+              <Th bg={"white"}>Skills</Th>
+            </Tr>
+            {skills?.map((skill: any, idx: any) => (
+              <>
+                {" "}
+                <Tr key={idx}>
+                  <Td>{skill.name}</Td>
+                  <Td>{skill.type}</Td>
+                </Tr>
+              </>
+            ))}
+          </Tbody>
+        </Table>
+      </Box>
+    </>
   );
 };
 
