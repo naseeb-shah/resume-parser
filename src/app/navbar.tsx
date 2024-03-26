@@ -34,7 +34,7 @@ const Navbar = () => {
         <Text mr="4" as={Link} href="/resume-parser">
           Resume Parser -A
         </Text>
-        <Text mr={"8"} as={Link} href={"/parser-1"}>
+        <Text mr={"8"} as={Link} href={"/parser"}>
           Resume Parser -B
         </Text>
       </Flex>

@@ -358,6 +358,7 @@ export const ResumeDropzone = ({
     if (!show) {
       return;
     }
+    return;
     setLoading(true);
     const formData = new FormData();
     formData.append("providers", "senseloaf");

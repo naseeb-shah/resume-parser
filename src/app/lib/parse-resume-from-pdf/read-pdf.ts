@@ -6,7 +6,11 @@ import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 import type { TextItem as PdfjsTextItem } from "pdfjs-dist/types/src/display/api";
-import type { TextItem, TextItems } from "../../lib/parse-resume-from-pdf/types";
+import type {
+  TextItem,
+  TextItems,
+} from "../../lib/parse-resume-from-pdf/types";
+import { text } from "stream/consumers";
 
 /**
  * Step 1: Read pdf and output textItems by concatenating results from each page.
@@ -84,6 +88,6 @@ export const readPdf = async (fileUrl: string): Promise<TextItems> => {
   const isEmptySpace = (textItem: TextItem) =>
     !textItem.hasEOL && textItem.text.trim() === "";
   textItems = textItems.filter((textItem) => !isEmptySpace(textItem));
-
+  console.log(textItems);
   return textItems;
 };

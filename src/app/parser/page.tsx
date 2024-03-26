@@ -9,6 +9,7 @@ import { extractResumeFromSections } from "../lib/parse-resume-from-pdf/extract-
 import { ResumeDropzone } from "../components/ResumeDropzone";
 
 import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import Link from "next/link";
 
 const defaultFileUrl = "example/a.pdf";
 export default function ResumeParser() {
@@ -43,6 +44,14 @@ export default function ResumeParser() {
       >
         PARSER - B
       </Text>
+      <Flex
+        textAlign={"center"}
+        textDecor={"underline"}
+        color="blue.600"
+        justifyContent={"center"}
+      >
+        <Link href={"/resume-parser"}>Use Parser - A Click Here</Link>
+      </Flex>
       <div
         className="mt-4"
         style={{ width: "80%", margin: "auto", marginTop: 50 }}
